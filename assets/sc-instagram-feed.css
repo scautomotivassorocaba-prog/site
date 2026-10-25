@@ -28,3 +28,18 @@
 @media(max-width:880px){.sc-instagram-header{align-items:flex-start;flex-direction:column}.sc-instagram-content{height:400px}}
 @media(max-width:700px){.sc-instagram-section{overflow:hidden;padding-block:80px 95px}.sc-instagram-grid{display:grid;grid-auto-flow:column;grid-template-columns:none;grid-auto-columns:min(82vw,350px);overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-inline:contain;padding:3px 3px 15px;scrollbar-width:thin;scrollbar-color:#e51a3b transparent}.sc-instagram-card{scroll-snap-align:start}.sc-instagram-content{height:440px}.sc-instagram-card:hover{transform:none}}
 @media(prefers-reduced-motion:reduce){.sc-instagram-card{transition:none}}
+
+/* V17 - imagens estaticas, sem iframes ou controles interativos do Instagram */
+.sc-instagram-content.sc-instagram-static{height:clamp(330px,37vw,515px);background:#171b20;overflow:hidden}
+.sc-instagram-poster{position:absolute;inset:0;display:block;overflow:hidden;cursor:pointer;isolation:isolate}
+.sc-instagram-poster img{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .36s ease,opacity .3s ease}
+.sc-instagram-poster-fallback{filter:saturate(.78) contrast(1.06)}
+.sc-instagram-original-cover{opacity:0;pointer-events:none}
+.sc-instagram-has-cover .sc-instagram-original-cover{opacity:1}
+.sc-instagram-poster:after{content:"";position:absolute;inset:60% 0 0;pointer-events:none;background:linear-gradient(0deg,rgba(7,9,12,.44),transparent)}
+.sc-instagram-poster:hover img,.sc-instagram-poster:focus-visible img{transform:scale(1.035)}
+.sc-instagram-poster:focus-visible{outline:3px solid #ff425c;outline-offset:-4px}
+.sc-instagram-content.sc-instagram-static iframe,.sc-instagram-static button{display:none!important}
+.sc-instagram-poster-unavailable{background:linear-gradient(145deg,#292c33,#8f182b)}
+@media(max-width:700px){.sc-instagram-content.sc-instagram-static{height:clamp(390px,118vw,500px)}}
+@media(prefers-reduced-motion:reduce){.sc-instagram-poster img{transition:none}}
