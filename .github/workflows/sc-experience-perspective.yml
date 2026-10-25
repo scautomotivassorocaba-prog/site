@@ -1,0 +1,45 @@
+name: Integrate SC Perspective Experience
+on:
+  push:
+    branches: [main]
+    paths:
+      - assets/sc-experience-perspective.css
+      - assets/sc-experience-perspective.js
+      - .github/workflows/sc-experience-perspective.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  integrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Integrate experience in existing V14 page
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text(encoding='utf-8')
+          if 'class="experience-steps"' not in s or 'class="step' not in s:
+              raise SystemExit('Experience section missing, refusing unsafe rewrite')
+          css='<link rel="stylesheet" href="/assets/sc-experience-perspective.css" data-sc-perspective="v15">'
+          js='<script src="/assets/sc-experience-perspective.js" defer data-sc-perspective="v15"></script>'
+          if 'data-sc-perspective="v15"' not in s:
+              s=s.replace('</head>',css+'\n</head>',1).replace('</body>',js+'\n</body>',1)
+          s=s.replace('Conheça a SC <span>antes mesmo de chegar.</span>', 'Conheça a SC antes <span>mesmo de chegar.</span>')
+          assert css in s and js in s
+          p.write_text(s,encoding='utf-8')
+          PY
+      - name: Commit HTML integration
+        shell: bash
+        run: |
+          git config user.name "scautomotivassorocaba-prog"
+          git config user.email "scautomotivassorocaba@gmail.com"
+          git add index.html
+          if ! git diff --cached --quiet; then
+            git commit -m "feat: activate SC perspective gallery (V15)"
+            git push
+          fi
