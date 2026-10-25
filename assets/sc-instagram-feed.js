@@ -1,33 +1,31 @@
-/* SC - publicacoes fixas: SOMENTE fotos clicaveis, sem embed Instagram. */
+/* SC - tres capas originais dos Reels selecionados; sem embed, curtidas ou scroll. */
 (()=>{
-'use strict';
-const root=document.querySelector('[data-sc-instagram-feed]');if(!root)return;
+"use strict";
+const root=document.querySelector("[data-sc-instagram-feed]");if(!root)return;
 const chosen=[
-{code:'DewiD_-Mc2D',title:'Dia a dia da SC',backup:'/assets/media/38788e61588a4b9a.webp'},
-{code:'DeO9IT6szB_',title:'Trabalho na oficina',backup:'/assets/media/62d85892f3632cdc.webp'},
-{code:'DdHvAaAseTP',title:'Mais da nossa oficina',backup:'/assets/media/c1c68a3ee7c63f25.webp'}
+["DewiD_-Mc2D","Dia a dia da SC"],
+["DeO9IT6szB_","Um dos nossos trabalhos"],
+["DdHvAaAseTP","Acompanhe nossa oficina"]
 ];
 root.replaceChildren();
-chosen.forEach(({code,title,backup},i)=>{
-const url='https://www.instagram.com/reel/'+code+'/';
-const card=document.createElement('article');card.className='sc-instagram-card';
-const head=document.createElement('div');head.className='sc-instagram-card-head';
-head.innerHTML='<span class="sc-instagram-account"><span class="sc-instagram-mark">SC</span><span class="sc-instagram-account-name">@sancustom.oficina</span></span><span class="sc-instagram-card-tag">REEL</span>';
-const media=document.createElement('div');media.className='sc-instagram-content sc-instagram-static';
-const a=document.createElement('a');a.href=url;a.target='_blank';a.rel='noopener noreferrer';a.className='sc-instagram-poster';
-a.setAttribute('aria-label','Abrir Reel '+(i+1)+' da SC no Instagram');
-const fallback=document.createElement('img');fallback.src=backup;fallback.alt='Foto da SC Solucoes Automotivas. Abrir Reel no Instagram.';fallback.className='sc-instagram-poster-fallback';fallback.loading='lazy';fallback.decoding='async';
-fallback.addEventListener('error',()=>{fallback.style.display='none';media.classList.add('sc-instagram-poster-unavailable')});
-a.append(fallback);media.append(a);
-// Tenta usar a capa publica original, caso o Instagram permita; sem bloquear a foto reserva.
-const cover=new Image();cover.className='sc-instagram-original-cover';cover.alt='Capa do Reel da SC';cover.decoding='async';cover.loading='lazy';
-cover.addEventListener('load',()=>{if(cover.naturalWidth>=180&&cover.naturalHeight>=180){a.append(cover);a.classList.add('sc-instagram-has-cover')}});
-cover.src='https://www.instagram.com/p/'+code+'/media/?size=l';
-const foot=document.createElement('div');foot.className='sc-instagram-card-foot';
-const label=document.createElement('span');label.className='sc-instagram-card-label';label.textContent=title;
-const more=document.createElement('a');more.className='sc-instagram-open';more.href=url;more.target='_blank';more.rel='noopener noreferrer';more.textContent='Ver reel ↗';
-foot.append(label,more);card.append(head,media,foot);root.append(card);
+chosen.forEach(([code,title],i)=>{
+ const url="https://www.instagram.com/reel/"+code+"/";
+ const card=document.createElement("article");card.className="sc-instagram-card";
+ const head=document.createElement("div");head.className="sc-instagram-card-head";
+ head.innerHTML='<span class="sc-instagram-account"><span class="sc-instagram-mark">SC</span><span class="sc-instagram-account-name">@sancustom.oficina</span></span><span class="sc-instagram-card-tag">REEL</span>';
+ const media=document.createElement("div");media.className="sc-instagram-content sc-instagram-static";
+ const a=document.createElement("a");a.href=url;a.target="_blank";a.rel="noopener noreferrer";a.className="sc-instagram-poster";
+ a.setAttribute("aria-label","Abrir Reel "+(i+1)+" da SC no Instagram");
+ const img=document.createElement("img");img.src="/assets/reels/"+code+".jpg";img.className="sc-instagram-poster-fallback";
+ img.alt="Capa original do Reel "+(i+1)+" da SC no Instagram";img.loading="lazy";img.decoding="async";
+ img.addEventListener("error",()=>{img.remove();media.classList.add("sc-instagram-poster-unavailable");a.textContent="Abrir Reel no Instagram ↗";});
+ a.append(img);media.append(a);
+ const foot=document.createElement("div");foot.className="sc-instagram-card-foot";
+ const caption=document.createElement("span");caption.className="sc-instagram-card-label";caption.textContent=title;
+ const link=document.createElement("a");link.href=url;link.target="_blank";link.rel="noopener noreferrer";
+ link.className="sc-instagram-open";link.textContent="Ver reel ↗";
+ foot.append(caption,link);card.append(head,media,foot);root.append(card);
 });
-const status=document.querySelector('[data-sc-instagram-status]');
-if(status)status.textContent='Três Reels selecionados da SC. Toque na imagem para assistir no Instagram.';
+const status=document.querySelector("[data-sc-instagram-status]");
+if(status)status.textContent="Três Reels selecionados. Clique em uma capa para assistir no Instagram.";
 })();
