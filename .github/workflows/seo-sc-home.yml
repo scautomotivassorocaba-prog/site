@@ -1,0 +1,52 @@
+name: Integrate SEO to SC homepage
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/seo-home-integration.py'
+      - '.github/workflows/seo-sc-home.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  integrate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+        with: {persist-credentials: true}
+      - name: Integrate home SEO and build Open Graph image
+        run: |
+          python3 -m pip install --quiet Pillow
+          python3 tools/seo-home-integration.py
+      - name: Validate generated files
+        run: |
+          python3 - <<'PY'
+          import pathlib,xml.etree.ElementTree as ET,re,json
+          root=pathlib.Path('.')
+          ET.parse(root/'sitemap.xml')
+          html=(root/'index.html').read_text(encoding='utf-8')
+          assert html.count('rel="canonical"')==1, 'home canonical must be unique'
+          assert html.count('"@type":"AutoRepair"')>=1
+          assert html.count('class="sc-seo-hub-link"')==1
+          assert (root/'assets/og-sc.jpg').stat().st_size>30000
+          assert (root/'servicos/index.html').exists()
+          pages=list((root/'servicos').glob('*/index.html'))
+          assert len(pages)==13,len(pages)
+          for p in [root/'servicos/index.html',*pages]:
+              x=p.read_text(encoding='utf-8')
+              assert '<html lang="pt-BR">' in x and '<h1>' in x
+              assert x.count('rel="canonical"')==1
+              assert 'application/ld+json' in x
+          assert '<meta name="robots" content="noindex' not in html
+          print('validated SEO pages:',len(pages),'sitemap:',len(ET.parse(root/'sitemap.xml').getroot()))
+          PY
+      - name: Commit SEO and generated social image
+        run: |
+          git config user.name "scautomotivassorocaba-prog"
+          git config user.email "scautomotivassorocaba@gmail.com"
+          git add index.html assets/og-sc.jpg
+          if ! git diff --cached --quiet; then
+            git commit -m "seo: optimize SC home metadata and structured data"
+            git push
+          fi

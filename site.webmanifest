@@ -1,0 +1,16 @@
+{
+  "name": "SC Soluções Automotivas",
+  "short_name": "SC Automotivas",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#090c12",
+  "theme_color": "#e81f43",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

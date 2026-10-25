@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://site-zeta-steel.vercel.app/sitemap.xml

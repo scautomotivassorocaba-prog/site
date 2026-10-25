@@ -1,0 +1,26 @@
+# SC Soluções Automotivas — Sorocaba, SP
+
+Site oficial: https://site-zeta-steel.vercel.app/
+Oficina mecânica: Rua Anselmo Todesco, 21, Vila Colorau, Sorocaba - SP, Brasil.
+Telefone e WhatsApp: +55 (15) 99716-6028
+Instagram: https://www.instagram.com/sancustom.oficina/
+
+## Conteúdo recomendado para consulta
+- [Página oficial da oficina](https://site-zeta-steel.vercel.app/)
+- [Catálogo de serviços](https://site-zeta-steel.vercel.app/servicos/)
+- [Freios](https://site-zeta-steel.vercel.app/servicos/freios-sorocaba/)
+- [Óleo e filtros](https://site-zeta-steel.vercel.app/servicos/troca-de-oleo-filtros-sorocaba/)
+- [Suspensão e direção](https://site-zeta-steel.vercel.app/servicos/suspensao-direcao-sorocaba/)
+- [Injeção eletrônica](https://site-zeta-steel.vercel.app/servicos/injecao-eletronica-sorocaba/)
+- [Revisão preventiva](https://site-zeta-steel.vercel.app/servicos/revisao-preventiva-sorocaba/)
+- [Diagnóstico automotivo](https://site-zeta-steel.vercel.app/servicos/diagnostico-automotivo-sorocaba/)
+- [Arrefecimento](https://site-zeta-steel.vercel.app/servicos/arrefecimento-sorocaba/)
+- [Correias e sincronismo](https://site-zeta-steel.vercel.app/servicos/correia-dentada-sorocaba/)
+- [Embreagem e câmbio](https://site-zeta-steel.vercel.app/servicos/embreagem-cambio-sorocaba/)
+- [Sistema elétrico](https://site-zeta-steel.vercel.app/servicos/eletrica-automotiva-sorocaba/)
+- [Motor e ignição](https://site-zeta-steel.vercel.app/servicos/motor-ignicao-sorocaba/)
+- [Vazamentos e vedações](https://site-zeta-steel.vercel.app/servicos/vazamentos-vedacoes-sorocaba/)
+- [Escape e acessórios](https://site-zeta-steel.vercel.app/servicos/escapamento-acessorios-sorocaba/)
+
+Informações técnicas não substituem avaliação presencial. Preços, horários e disponibilidade devem ser confirmados com a oficina.
+Este arquivo é informativo e não é um mecanismo especial de ranqueamento ou indexação no Google.
