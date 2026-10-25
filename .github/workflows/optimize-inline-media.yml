@@ -1,0 +1,42 @@
+name: Improve SC SEO load performance
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/optimize-inline-media.py'
+      - '.github/workflows/optimize-inline-media.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  optimize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+        with: {persist-credentials: true}
+      - name: Externalize repeated inline images
+        run: python3 tools/optimize-inline-media.py
+      - name: Validate resulting references
+        run: |
+          python3 - <<'PY'
+          import pathlib,re,json
+          h=pathlib.Path('index.html').read_text()
+          refs=set(re.findall(r'/assets/seo-extracted/[a-f0-9]{16}\.(?:webp|png|jpg|svg)',h))
+          assert len(refs)>=7, ('expected extracted image sources',len(refs))
+          assert all(pathlib.Path(r.lstrip('/')).exists() for r in refs)
+          assert 'id="servicos"' in h and 'id="experiencia"' in h
+          assert 'rel="canonical"' in h
+          assert '<script' in h and 'id="scChatRoot"' in h
+          assert 'data:image/webp;base64,' not in h
+          print('All images verified:',len(refs),'bytes:',len(h.encode()))
+          PY
+      - name: Commit page and unchanged image files
+        run: |
+          git config user.name "scautomotivassorocaba-prog"
+          git config user.email "scautomotivassorocaba@gmail.com"
+          git add index.html assets/seo-extracted
+          if ! git diff --cached --quiet; then
+            git commit -m "perf: externalize cached WebP images and slim SC homepage"
+            git push
+          fi
