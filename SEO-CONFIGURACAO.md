@@ -26,3 +26,15 @@ https://site-zeta-steel.vercel.app/
 
 ## Nota
 Nenhum arquivo garante indexação, classificação no mapa ou citação pelas ferramentas de IA. O Google informa que os recursos de IA usam as boas práticas normais de SEO. `llms.txt` não é usado pelo Google para esse fim.
+
+## SEO local - V21 (2026-10-25)
+- Seis páginas institucionais/locais publicadas: sobre, contato, bastidores, avaliações, perguntas frequentes e dicas.
+- Quatro guias automotivos individuais para buscas de problemas e sintomas.
+- Sitemaps: 25 URLs de páginas em sitemap.xml; sitemap-images.xml contém fotos e miniaturas de Reels reais que aparecem nas páginas.
+- Links internos na home e nas 13 páginas de serviço, com conteúdos relacionados.
+- Nenhuma avaliação, horário, preço ou serviço não confirmado foi inventado.
+- Validar nome, relação SC / San Custom, endereço, horário e número com a cliente, e confirmar os serviços antes de anunciar na Google Business Profile.
+- Ainda é necessário verificar o domínio no Google Search Console e enviar ambos os sitemaps. É necessário acesso ao Google para isso; não confundir publicação na Vercel com indexação concluída.
+- Vínculo com Perfil da Empresa do Google precisa ser configurado com acesso autorizado à conta da empresa.
+- Casos de serviço por carro só serão publicados após receber registro técnico e autorização para fotos. Fotos de IA devem ser identificadas como ilustrativas se utilizadas no futuro.
+- Um domínio próprio exigirá compra/registro e atualização de URLs canônicas, sitemaps, Search Console e redirecionamentos 301.

@@ -24,3 +24,11 @@ Instagram: https://www.instagram.com/sancustom.oficina/
 
 Informações técnicas não substituem avaliação presencial. Preços, horários e disponibilidade devem ser confirmados com a oficina.
 Este arquivo é informativo e não é um mecanismo especial de ranqueamento ou indexação no Google.
+
+## Informações locais da oficina
+- [Sobre a SC](https://site-zeta-steel.vercel.app/sobre-a-sc/)
+- [Contato e endereço](https://site-zeta-steel.vercel.app/contato/)
+- [Fotos e bastidores](https://site-zeta-steel.vercel.app/trabalhos-realizados/)
+- [Avaliações no Google](https://site-zeta-steel.vercel.app/avaliacoes/)
+- [Dúvidas frequentes](https://site-zeta-steel.vercel.app/duvidas-frequentes/)
+- [Dicas automotivas](https://site-zeta-steel.vercel.app/dicas-automotivas/)
