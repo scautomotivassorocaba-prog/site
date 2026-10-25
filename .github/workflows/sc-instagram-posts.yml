@@ -1,0 +1,58 @@
+name: SC Instagram posts
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'assets/sc-instagram-feed.css'
+      - 'assets/sc-instagram-feed.js'
+      - '.github/workflows/sc-instagram-posts.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  integrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Insert exact three Instagram Reels
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('index.html')
+          s=p.read_text(encoding='utf-8')
+          section='''<section class="sc-instagram-section wrap" id="instagram-posts" aria-labelledby="instagram-posts-title">
+            <div class="sc-instagram-header">
+              <div><div class="eyebrow"><span class="tiny-line"></span> NOSSO INSTAGRAM</div>
+              <h2 id="instagram-posts-title">Veja nossos <span>últimos posts.</span></h2>
+              <p>Os bastidores, os carros e o dia a dia da SC. Acompanhe de perto o que acontece por aqui.</p></div>
+              <a class="sc-instagram-profile" href="https://www.instagram.com/sancustom.oficina/" target="_blank" rel="noopener noreferrer">Seguir @sancustom.oficina ↗</a>
+            </div>
+            <div class="sc-instagram-grid" data-sc-instagram-feed aria-label="Três publicações do Instagram da SC"></div>
+            <p class="sc-instagram-hint">Três Reels selecionados pela SC. Clique para assistir no Instagram.</p>
+          </section>
+          '''
+          if 'id="instagram-posts"' not in s:
+              s,n=re.subn(r'(?=<section\b[^>]*\bid=["\x27]localizacao["\x27])',lambda _:section,s,count=1)
+              if n!=1:raise SystemExit('Localizacao não encontrada; abortando')
+          tag='<link rel="stylesheet" href="/assets/sc-instagram-feed.css" data-sc-ig="selected">'
+          script='<script src="/assets/sc-instagram-feed.js" defer data-sc-ig="selected"></script>'
+          if 'data-sc-ig="selected"' not in s:
+              s=s.replace('</head>',tag+'\n</head>',1)
+              s=s.replace('</body>',script+'\n</body>',1)
+          if s.count('id="instagram-posts"')!=1 or 'data-sc-ig="selected"' not in s:
+              raise SystemExit('Verificação de seção e dependências falhou')
+          p.write_text(s,encoding='utf-8')
+          PY
+      - name: Commit site
+        run: |
+          git config user.name "scautomotivassorocaba-prog"
+          git config user.email "scautomotivassorocaba@gmail.com"
+          git add index.html
+          if ! git diff --cached --quiet; then
+            git commit -m "feat: display 3 customer-selected Instagram Reels (V16)"
+            git push
+          fi

@@ -1,0 +1,30 @@
+/* SC V16 - 3 Reels selecionados pela cliente. */
+.sc-instagram-section{padding-block:clamp(85px,9vw,138px);position:relative}
+.sc-instagram-header{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:36px}
+.sc-instagram-header h2{font-size:clamp(32px,4.2vw,60px);line-height:1.06;letter-spacing:-.05em;margin:15px 0 12px;color:#fff;font-weight:850}
+.sc-instagram-header h2 span{color:#f01633}
+.sc-instagram-header p{color:#afb6bf;line-height:1.6;max-width:590px;font-size:15px;margin:0}
+.sc-instagram-profile{display:inline-flex;align-items:center;gap:9px;border-radius:999px;border:1px solid #ffffff35;padding:14px 18px;font-size:13px;font-weight:800;color:#f5f5f7;white-space:nowrap}
+.sc-instagram-profile:hover{background:#d71b3430;border-color:#e62948}
+.sc-instagram-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(12px,2vw,24px);min-width:0;max-width:100%}
+.sc-instagram-card{min-width:0;background:#101318;overflow:hidden;border:1px solid #ffffff22;border-radius:22px;transition:transform .25s ease,border-color .25s ease;box-shadow:0 16px 48px #0005}
+.sc-instagram-card:hover{transform:translateY(-4px);border-color:#f0163366}
+.sc-instagram-card-head{display:flex;align-items:center;justify-content:space-between;padding:15px 16px;gap:12px}
+.sc-instagram-account{display:flex;align-items:center;gap:9px;min-width:0;font-size:12px;color:#fff;font-weight:750}
+.sc-instagram-mark{width:32px;height:32px;flex:none;display:grid;place-items:center;background:#e51a3b;border-radius:10px;color:#fff;font-size:11px;font-weight:950}
+.sc-instagram-account-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sc-instagram-card-tag{color:#f3294b;font-size:10px;letter-spacing:.13em;font-weight:850}
+.sc-instagram-content{position:relative;background:#141820;height:clamp(350px,34vw,490px);overflow:hidden}
+.sc-instagram-content iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#fff}
+.sc-instagram-placeholder{position:absolute;z-index:2;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;text-align:center;padding:24px;color:#fff;background:radial-gradient(circle at 50% 40%,#29222b,#101317 65%);font-size:13px;font-weight:750}
+.sc-instagram-placeholder svg{width:38px;height:38px;color:#f31f45}
+.sc-instagram-placeholder[hidden]{display:none!important}
+.sc-instagram-content:has(.sc-instagram-placeholder:not([hidden])) iframe{visibility:hidden}
+.sc-instagram-card-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:15px 16px;min-height:68px}
+.sc-instagram-card-label{font-size:12px;line-height:1.5;color:#c5cbd2;max-width:63%}
+.sc-instagram-open{font-size:12px;color:#fff;font-weight:800;border-bottom:1px solid #f31f45;white-space:nowrap}
+.sc-instagram-open:hover{color:#ff526e}
+.sc-instagram-hint{margin-top:21px;font-size:12px;color:#919aa4}
+@media(max-width:880px){.sc-instagram-header{align-items:flex-start;flex-direction:column}.sc-instagram-content{height:400px}}
+@media(max-width:700px){.sc-instagram-section{overflow:hidden;padding-block:80px 95px}.sc-instagram-grid{display:grid;grid-auto-flow:column;grid-template-columns:none;grid-auto-columns:min(82vw,350px);overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-inline:contain;padding:3px 3px 15px;scrollbar-width:thin;scrollbar-color:#e51a3b transparent}.sc-instagram-card{scroll-snap-align:start}.sc-instagram-content{height:440px}.sc-instagram-card:hover{transform:none}}
+@media(prefers-reduced-motion:reduce){.sc-instagram-card{transition:none}}
