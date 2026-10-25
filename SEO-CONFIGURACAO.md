@@ -38,3 +38,7 @@ Nenhum arquivo garante indexação, classificação no mapa ou citação pelas f
 - Vínculo com Perfil da Empresa do Google precisa ser configurado com acesso autorizado à conta da empresa.
 - Casos de serviço por carro só serão publicados após receber registro técnico e autorização para fotos. Fotos de IA devem ser identificadas como ilustrativas se utilizadas no futuro.
 - Um domínio próprio exigirá compra/registro e atualização de URLs canônicas, sitemaps, Search Console e redirecionamentos 301.
+
+## Atenção: divergência em diretórios locais (verificação humana)
+Em verificação pública de 2026-10-25, um diretório de terceiros lista 'Mecânica San Custom' com telefone (15) 99716-6028, mas endereço Rua Tomaz Sanches Artero, 490, Vila Colorau. No site da SC, o endereço confirmado no projeto é Rua Anselmo Todesco, 21, Vila Colorau. Não mudar o site sem confirmação da proprietária. Perguntar se a San Custom é o nome anterior da SC e se houve mudança de endereço; atualizar o Perfil da Empresa e corrigir diretórios de terceiros após validar os dados. Não alegar que o Google Maps oficial já foi corrigido ou que o Perfil está verificado.
+Fonte para checagem: https://br.todosnegocios.com/pt/san-custom-15-99716-6028
