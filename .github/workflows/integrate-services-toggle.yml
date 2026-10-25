@@ -1,0 +1,46 @@
+name: Integrate collapsible SC services
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'assets/sc-services-toggle.js'
+      - 'assets/sc-services-toggle.css'
+      - '.github/workflows/integrate-services-toggle.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  integrate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Add service controls to site
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          html_file=Path('index.html')
+          html=html_file.read_text(encoding='utf-8')
+          if 'id="servicos"' not in html or 'class="service-grid"' not in html or html.count('class="service-card ') < 18:
+              raise SystemExit('Expected 18-service catalog missing; not changing production')
+          stylesheet='<link rel="stylesheet" href="/assets/sc-services-toggle.css" data-sc-services="v18">'
+          script='<script src="/assets/sc-services-toggle.js" defer data-sc-services="v18"></script>'
+          if 'data-sc-services="v18"' not in html:
+              if '</head>' not in html or '</body>' not in html:
+                  raise SystemExit('Expected HTML landmarks missing')
+              html=html.replace('</head>',stylesheet+'\n</head>',1)
+              html=html.replace('</body>',script+'\n</body>',1)
+              html_file.write_text(html,encoding='utf-8')
+          PY
+      - name: Publish updated index
+        run: |
+          git config user.name "scautomotivassorocaba-prog"
+          git config user.email "scautomotivassorocaba@gmail.com"
+          git add index.html
+          if ! git diff --cached --quiet; then
+            git commit -m "feat: first service row with show more/less toggle (V18)"
+            git push
+          fi

@@ -1,0 +1,12 @@
+/* SC Soluções Automotivas — V18. Apenas a primeira linha de serviços até expandir. */
+.services .service-grid.sc-services-collapsed > .service-card:nth-child(n + 7){display:none!important}
+@media(max-width:1200px){.services .service-grid.sc-services-collapsed > .service-card:nth-child(n + 4){display:none!important}}
+@media(max-width:560px){.services .service-grid.sc-services-collapsed > .service-card:nth-child(n + 3){display:none!important}}
+.sc-services-toggle-wrap{display:flex;justify-content:center;align-items:center;margin-top:28px}
+.sc-services-toggle{appearance:none;display:inline-flex;align-items:center;justify-content:center;gap:14px;min-height:49px;padding:12px 24px;border-radius:999px;border:1px solid rgba(238,67,89,.52);background:linear-gradient(125deg,rgba(21,24,29,.95),rgba(40,19,26,.89));box-shadow:inset 0 1px rgba(255,255,255,.075),0 11px 30px rgba(0,0,0,.17);color:#f6f8fa;font:inherit;font-weight:720;font-size:13px;letter-spacing:.015em;cursor:pointer;transition:border-color .22s ease,background .22s ease,transform .22s ease}
+.sc-services-toggle:hover{border-color:#ff4260;background:#6e1426;transform:translateY(-2px)}
+.sc-services-toggle:focus-visible{outline:3px solid #ff4566;outline-offset:4px}
+.sc-services-toggle-icon{width:22px;height:22px;display:inline-grid;place-items:center;border-radius:50%;background:#d82040;font-size:14px;line-height:1;transition:transform .22s ease}
+.sc-services-toggle[aria-expanded="true"] .sc-services-toggle-icon{transform:rotate(180deg)}
+@media(max-width:560px){.sc-services-toggle-wrap{margin-top:20px}.sc-services-toggle{width:100%;max-width:340px}}
+@media(prefers-reduced-motion:reduce){.sc-services-toggle,.sc-services-toggle-icon{transition:none}}
