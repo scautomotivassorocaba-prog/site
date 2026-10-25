@@ -1,0 +1,48 @@
+name: Publish SC mobile refinements and footer credit
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'assets/sc-mobile-finish.css'
+      - '.github/workflows/integrate-sc-mobile-v19.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  integrate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Apply reviewed CSS and Consecom footer link
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text(encoding='utf-8')
+          expected=['<footer class="footer wrap">','</footer>','</head>','id="inicio"','class="workshop']
+          if not all(token in s for token in expected):
+              raise SystemExit('Site layout differs from approved SC version; refusing update')
+          link='<link rel="stylesheet" href="/assets/sc-mobile-finish.css" data-sc-mobile="v19">'
+          credit='<a class="sc-madeby" href="https://www.instagram.com/consecombrasil/" target="_blank" rel="noopener noreferrer" aria-label="Feito por Consecom — visitar Instagram"><span>Feito por </span><strong>Consecom</strong></a>'
+          if 'data-sc-mobile="v19"' not in s:
+              s=s.replace('</head>',link+'\n</head>',1)
+          if 'class="sc-madeby"' not in s:
+              before=s.split('<footer class="footer wrap">',1)
+              before[1]=before[1].replace('</footer>',credit+'</footer>',1)
+              s='<footer class="footer wrap">'.join(before)
+          if s.count('data-sc-mobile="v19"')!=1 or s.count('class="sc-madeby"')!=1:
+              raise SystemExit('Unexpected duplicate mobile CSS or footer credit')
+          p.write_text(s,encoding='utf-8')
+          PY
+      - name: Commit page update
+        run: |
+          git config user.name "scautomotivassorocaba-prog"
+          git config user.email "scautomotivassorocaba@gmail.com"
+          git add index.html
+          if ! git diff --cached --quiet; then
+            git commit -m "style: refine SC mobile hero and center CTA; add Consecom footer credit"
+            git push
+          fi
