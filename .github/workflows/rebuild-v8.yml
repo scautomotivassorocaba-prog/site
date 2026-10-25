@@ -1,0 +1,45 @@
+name: SC website V8 — production repair
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/rebuild_site.py'
+      - 'tools/refinements.css'
+      - '.github/workflows/rebuild-v8.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  rebuild:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Build static website from inline V7
+        run: python3 tools/rebuild_site.py
+      - name: Validate all image paths and scroll frames
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          h=Path('index.html').read_text()
+          assert 12000<len(h)<80000
+          assert 'window.__SC_INLINE_FRAMES__' not in h
+          assert len(list(Path('assets/frames').glob('shot_*.webp')))==340
+          for link in set(re.findall(r'(?:href|src|data-photo|content)="(assets/[^"?]+)',h)):
+              assert Path(link).is_file(), link
+          assert Path('assets/css/refinements.css').is_file()
+          assert Path('assets/js/app.js').is_file()
+          print('Production assets and 340 frames valid')
+          PY
+      - name: Publish repaired static site
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html assets
+          git diff --cached --quiet || git commit -m 'fix: v8 clean SC website, assets and scroll [skip ci]'
+          git push origin HEAD:main
