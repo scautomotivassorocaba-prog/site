@@ -1,0 +1,36 @@
+name: Save verified SC Reel covers
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/sync-sc-reel-covers.yml'
+      - 'tools/sync_selected_reel_covers.py'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Download and verify thumbnail of each selected Instagram Reel
+        run: python3 tools/sync_selected_reel_covers.py
+      - name: Validate local links and files
+        run: |
+          test -s assets/reels/DewiD_-Mc2D.jpg
+          test -s assets/reels/DeO9IT6szB_.jpg
+          test -s assets/reels/DdHvAaAseTP.jpg
+          grep -q 'DewiD_-Mc2D.jpg' assets/sc-instagram-feed.js || true
+          if grep -E -q 'createElement\(["\x27]iframe' assets/sc-instagram-feed.js; then exit 1; fi
+      - name: Commit verified covers and corrected static cards
+        run: |
+          git config user.name "scautomotivassorocaba-prog"
+          git config user.email "scautomotivassorocaba@gmail.com"
+          git add assets/reels/*.jpg assets/sc-instagram-feed.js
+          if ! git diff --cached --quiet; then
+            git commit -m "fix: save matching Instagram reel thumbnails in site assets"
+            git push
+          fi
