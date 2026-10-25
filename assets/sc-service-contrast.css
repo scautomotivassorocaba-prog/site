@@ -1,0 +1,39 @@
+/* SC Soluções Automotivas – V14: ritmo alternado por linha (6 colunas). */
+.services .service-grid .service-card:nth-child(12n + 1),
+.services .service-grid .service-card:nth-child(12n + 3),
+.services .service-grid .service-card:nth-child(12n + 5),
+.services .service-grid .service-card:nth-child(12n + 8),
+.services .service-grid .service-card:nth-child(12n + 10),
+.services .service-grid .service-card:nth-child(12n + 12){background:linear-gradient(145deg,#a71630 0%,#7e0e20 46%,#430d18 100%);border-color:#d6475b69;box-shadow:inset 0 1px #ffffff13}
+.services .service-grid .service-card:nth-child(12n + 1) .service-art,
+.services .service-grid .service-card:nth-child(12n + 3) .service-art,
+.services .service-grid .service-card:nth-child(12n + 5) .service-art,
+.services .service-grid .service-card:nth-child(12n + 8) .service-art,
+.services .service-grid .service-card:nth-child(12n + 10) .service-art,
+.services .service-grid .service-card:nth-child(12n + 12) .service-art{opacity:.34;filter:grayscale(1) sepia(1) saturate(6) hue-rotate(315deg) brightness(.82) contrast(1.12)}
+.services .service-grid .service-card:nth-child(12n + 1)::before,
+.services .service-grid .service-card:nth-child(12n + 3)::before,
+.services .service-grid .service-card:nth-child(12n + 5)::before,
+.services .service-grid .service-card:nth-child(12n + 8)::before,
+.services .service-grid .service-card:nth-child(12n + 10)::before,
+.services .service-grid .service-card:nth-child(12n + 12)::before{background:linear-gradient(180deg,#7c0c23d1 0%,#5d0b1bbb 38%,#2a0812e8 100%)}
+.services .service-grid .service-card:nth-child(12n + 1) .service-icon,
+.services .service-grid .service-card:nth-child(12n + 3) .service-icon,
+.services .service-grid .service-card:nth-child(12n + 5) .service-icon,
+.services .service-grid .service-card:nth-child(12n + 8) .service-icon,
+.services .service-grid .service-card:nth-child(12n + 10) .service-icon,
+.services .service-grid .service-card:nth-child(12n + 12) .service-icon{color:#fff0f3}
+.services .service-grid .service-card:nth-child(12n + 1) p,
+.services .service-grid .service-card:nth-child(12n + 3) p,
+.services .service-grid .service-card:nth-child(12n + 5) p,
+.services .service-grid .service-card:nth-child(12n + 8) p,
+.services .service-grid .service-card:nth-child(12n + 10) p,
+.services .service-grid .service-card:nth-child(12n + 12) p{color:#f5d8de}
+.services .service-grid .service-card:nth-child(12n + 1) .arrow-disc,
+.services .service-grid .service-card:nth-child(12n + 3) .arrow-disc,
+.services .service-grid .service-card:nth-child(12n + 5) .arrow-disc,
+.services .service-grid .service-card:nth-child(12n + 8) .arrow-disc,
+.services .service-grid .service-card:nth-child(12n + 10) .arrow-disc,
+.services .service-grid .service-card:nth-child(12n + 12) .arrow-disc{border-color:#ffd9e181;background:#ffffff13}
+.services .service-grid .service-card:hover{box-shadow:0 12px 28px #0008,inset 0 1px #ffffff18}
+.services .service-grid .service-card:hover .service-art{opacity:.44}

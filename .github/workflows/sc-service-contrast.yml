@@ -1,0 +1,41 @@
+name: Apply SC Services Contrast
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'assets/sc-service-contrast.css'
+      - '.github/workflows/sc-service-contrast.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  integrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Activate updated service cards
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          html = p.read_text(encoding='utf-8')
+          tag = '<link rel="stylesheet" href="/assets/sc-service-contrast.css" data-sc-contrast="v14">'
+          if 'class="service-grid"' not in html or '</head>' not in html:
+              raise SystemExit('Expected SC services markup was not found; no changes were made')
+          if 'data-sc-contrast="v14"' not in html:
+              html = html.replace('</head>', tag + '\n</head>', 1)
+              p.write_text(html, encoding='utf-8')
+          PY
+      - name: Publish updated index
+        shell: bash
+        run: |
+          git config user.name "scautomotivassorocaba-prog"
+          git config user.email "scautomotivassorocaba@gmail.com"
+          git add index.html
+          if ! git diff --cached --quiet; then
+            git commit -m "style: activate alternating red service cards (V14)"
+            git push
+          fi
